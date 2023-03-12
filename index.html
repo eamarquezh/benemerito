@@ -52,82 +52,9 @@
 
     <div id="test2"></div><br><br>
     <div class="section white">
-      <div class="row container">
-        <h2 class="header">Nuestro Equipo</h2>
-      
-        <div class="col s12 m8 offset-m2 l6 offset-l3">
-          <div class="card-panel grey lighten-5 z-depth-1">
-            <div class="row valign-wrapper">
-              <div class="col s4">
-                <img src="media/perfil_presidente.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-              </div>
-              <div class="col s8">
-                <span class="black-text">
-                  <h5>Mary Cruz Padilla Chavez</h5>
-                </span>
-                <span class="">
-                  Presidente del consejo municipal de Epazoyucan Hidalgo.
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col s12 m8 offset-m2 l6 offset-l3">
-          <div class="card-panel grey lighten-5 z-depth-1">
-            <div class="row valign-wrapper">
-              <div class="col s4">
-                <img src="media/Perfil_Luis.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-              </div>
-              <div class="col s8">
-                <span class="black-text">
-                  <h5>Luis Pacheco Padilla</h5>
-                </span>
-                <span class="">
-                  Integrante 2.
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col s12 m8 offset-m2 l6 offset-l3">
-          <div class="card-panel grey lighten-5 z-depth-1">
-            <div class="row valign-wrapper">
-              <div class="col s4">
-                <img src="media/perfil_pamela.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-              </div>
-              <div class="col s8">
-                <span class="black-text">
-                  <h5>Pamela Islas Padilla</h5>
-                </span>
-                <span class="">
-                  Integrante 3.
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col s12 m8 offset-m2 l6 offset-l3">
-          <div class="card-panel grey lighten-5 z-depth-1">
-            <div class="row valign-wrapper">
-              <div class="col s4">
-                <img src="media/perfil_marina.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-              </div>
-              <div class="col s8">
-                <span class="black-text">
-                  <h5>Marina Montiel Lozada</h5>
-                </span>
-                <span class="">
-                  Integrante 4.
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
+      <div class="row container" id="equipo">
+          <h2 class="header">Nuestro Equipo</h2>
+  
 
       </div>
     </div>
@@ -209,7 +136,7 @@
     
 <!-- Compiled and minified JavaScript -->
 <script>
-  alert("Esto es una pagina muestra y no pertenece a ninguna asociacion en este momento")
+  //alert("Esto es una pagina muestra y no pertenece a ninguna asociacion en este momento")
     document.addEventListener('DOMContentLoaded', function() {
     let options={};
     let elems = document.querySelectorAll('.parallax');
@@ -221,6 +148,56 @@
     let elems = document.querySelectorAll('.sidenav');
     let instances = M.Sidenav.init(elems, options);
   });
+
+  var integrantes = [
+                      {"foto":"/media/perfil_mary.jpg","nombre":"Mary Cruz Padilla Chávez","cargo":"Presidenta"},
+                      {"foto":"/media/perfil_luis.jpg","nombre":"Luis Pacheco Padilla","cargo":"Vicepresidente "},
+                      {"foto":"/media/perfil_rene.jpg","nombre":"Rene González Luna","cargo":"Secretario General"},
+                      {"foto":"/media/perfil_jose.jpg","nombre":"José Alfredo Aguilar Islas","cargo":"Secretario de Organización"},
+                      {"foto":"/media/perfil_marina.jpg","nombre":"Marina Montiel Lozada","cargo":"Secretaría de la Mujer"},
+                      {"foto":"/media/perfil_araceli.jpg","nombre":"Araceli Tolentino Pineda","cargo":"Secretaría de Comunicación"},
+                      {"foto":"/media/perfil_florentino.jpg","nombre":"Florentino Sánchez Ávila","cargo":"Secretario de Finanzas"},
+                    ]
+
+        for (let i = 0; i < integrantes.length; i++) {
+        const equipo = document.getElementById('equipo');
+        const div1 = document.createElement("div");
+        const div2 = document.createElement("div");
+        const div3 = document.createElement("div");
+        const div4 = document.createElement("div");
+        const div5 = document.createElement("div");
+        const span1 = document.createElement("span");
+        const span2 = document.createElement("span");
+        const h = document.createElement("h5");
+        const img = document.createElement("img");
+        div1.className = "col s12 m8 offset-m2 l6 offset-l3";
+        div2.className = "card-panel grey lighten-5 z-depth-1";
+        div3.className = "row valign-wrapper";
+        div4.className = "col s4";
+        div5.className = "col s8";
+        span1.className ="black-text";
+
+        img.src = integrantes[i].foto;
+        img.className = "circle responsive-img";
+
+        h.textContent=integrantes[i].nombre;
+        span2.textContent =integrantes[i].cargo;
+
+        const fragment = document.createDocumentFragment();
+        fragment.appendChild(div1);
+        div1.appendChild(div2);
+        div2.appendChild(div3);
+        div3.appendChild(div4);
+        div3.appendChild(div5);
+        
+        div4.appendChild(img);
+        span1.appendChild(h);
+
+        div5.appendChild(span1);
+        div5.appendChild(span2);
+
+        equipo.appendChild(fragment);
+    }
 </script>
 </body>
 </html>
