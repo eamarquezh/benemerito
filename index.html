@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="favicon-32x32.png"/>
     <title>Benemérito Juárez Siglo XXI, Epazoyucan</title>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="css/materialize.css">  
@@ -68,42 +69,14 @@
       <div class="row container">
         <h2 class="header">Contactanos</h2>
 
-        <div class="row">
-          <form class="col s12">
-            <div class="row">
-              <div class="input-field col s12">
-                <i class="material-icons prefix">mail</i>
-                <input id="email" type="email" class="validate">
-                <label for="email">Ingresa tu correo</label>
-              </div>
-
-              <div class="input-field col s12">
-                <i class="material-icons prefix">phone</i>
-                <input id="email" type="email" class="validate">
-                <label for="email">Ingresa tu telefono</label>
-              </div>
-
-              <div class="row">
-                <div class="input-field col s12">
-                  <i class="material-icons prefix">mode_edit</i>
-                  <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
-                  <label for="icon_prefix2">Escribe tu mensaje</label>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="input-field col s12">
-                  <button class="btn waves-effect waves-light brown darken-1" type="submit" name="action">Enviar
-                    <i class="material-icons right">send</i>
-                  </button>
-                </div>
-              </div>
-
-              
-
-            </div>
-          </form>
-        </div>
+        <form id="my-form" action="https://formspree.io/f/mgebzzkj" method="POST">
+          <label>ingresa tu correo electronico:</label>
+          <input type="email" name="email" />
+          <label>Ingrea tu mensaje:</label>
+          <input type="text" name="message" />
+          <button id="my-form-button" class="btn-large waves-effect waves-light red lighten-2">Enviar</button>
+          <p id="my-form-status"></p>
+        </form>
 
       </div>
     </div>
@@ -198,6 +171,38 @@
 
         equipo.appendChild(fragment);
     }
+
+
+    var form = document.getElementById("my-form");
+    
+    async function handleSubmit(event) {
+      event.preventDefault();
+      var status = document.getElementById("my-form-status");
+      var data = new FormData(event.target);
+      fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          status.innerHTML = "Gracias por contactarnos";
+          form.reset()
+        } else {
+          response.json().then(data => {
+            if (Object.hasOwn(data, 'errors')) {
+              status.innerHTML = "Asegurate de escribir todos tus datos"
+            } else {
+              status.innerHTML = "Oops! There was a problem submitting your form"
+            }
+          })
+        }
+      }).catch(error => {
+        status.innerHTML = "Oops! There was a problem submitting your form"
+      });
+    }
+    form.addEventListener("submit", handleSubmit)
 </script>
 </body>
 </html>
